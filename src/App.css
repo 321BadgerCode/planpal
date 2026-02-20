@@ -1,0 +1,17 @@
+body,
+html,
+#root {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	font-family:
+		"Segoe UI",
+		Roboto,
+		-apple-system,
+		sans-serif;
+	background: linear-gradient(135deg, #4e54c8, #8f94fb);
+}
+
+ion-content {
+	--background: transparent;
+}

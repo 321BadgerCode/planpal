@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">PlanPal</string>
+    <string name="title_activity_main">PlanPal</string>
+    <string name="package_name">com.badger.planpal</string>
+    <string name="custom_url_scheme">com.badger.planpal</string>
+</resources>
