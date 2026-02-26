@@ -1,7 +1,9 @@
 import React from "react";
 import { IonApp } from "@ionic/react";
 import Home from "./Home";
+import Login from "./login/Login";
 import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router";
 
 import "@ionic/react/css/core.css";
 import "@ionic/react/css/normalize.css";
@@ -16,7 +18,12 @@ import "@ionic/react/css/display.css";
 const App: React.FC = () => {
 	return (
 		<IonApp>
-			<Home />
+			<BrowserRouter>
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="/login" element={<Login />} />
+				</Routes>
+			</BrowserRouter>
 		</IonApp>
 	);
 };

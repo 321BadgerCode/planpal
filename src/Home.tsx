@@ -33,9 +33,9 @@ const Home: React.FC = () => {
 				<section className="hero-section">
 					<h1>PlanPal</h1>
 					<p>Organize your tasks, projects, and goals all in one place.</p>
-					<IonButton expand="block" color="secondary" className="hero-button">
-						Get Started
-					</IonButton>
+					<a href="/login">
+						<button className="hero-button">Get Started</button>
+					</a>
 				</section>
 
 				{/* Feature Cards */}
@@ -45,9 +45,7 @@ const Home: React.FC = () => {
 							<IonIcon icon={listOutline} size="large" />
 							<IonCardTitle>Tasks</IonCardTitle>
 						</IonCardHeader>
-						<IonCardContent>
-							Manage your daily tasks.
-						</IonCardContent>
+						<IonCardContent>Manage your daily tasks.</IonCardContent>
 					</IonCard>
 
 					<IonCard>
@@ -65,9 +63,7 @@ const Home: React.FC = () => {
 							<IonIcon icon={statsChartOutline} size="large" />
 							<IonCardTitle>Productivity</IonCardTitle>
 						</IonCardHeader>
-						<IonCardContent>
-							Increase productivity.
-						</IonCardContent>
+						<IonCardContent>Increase productivity.</IonCardContent>
 					</IonCard>
 				</section>
 			</IonContent>
