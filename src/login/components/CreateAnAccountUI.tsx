@@ -15,6 +15,13 @@ const CreateAnAccountUI = ({ setHasAccount }: Props) => {
 					placeholder="example@email.com"
 				></input>
 			</div>
+			<div className="w-full flex items-center flex-col my-2">
+				<div className="w-[85%]">Username:</div>
+				<input
+					className="w-[85%] h-10 pl-1 bg-gray-200 rounded-xs"
+					placeholder="username"
+				></input>
+			</div>
 			<div className="w-full flex items-center flex-col my-2  rounded-xs">
 				<div className="w-[85%]">Password:</div>
 				<input
@@ -35,7 +42,7 @@ const CreateAnAccountUI = ({ setHasAccount }: Props) => {
 				Create my account
 			</button>
 
-			<div className="h-20 mb-30 mt-10">
+			<div className="h-20 mb-10 mt-10">
 				Already have an account? Click
 				<strong
 					className="cursor-pointer "

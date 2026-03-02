@@ -34,7 +34,7 @@ const LoginUI = ({ setHasAccount }: Props) => {
 					</div>
 				</button>
 			</div>
-			<div className="h-20 mb-30">
+			<div className="h-20 mb-10">
 				Don't have an account? Create one
 				<strong
 					className="cursor-pointer "
