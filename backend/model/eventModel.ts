@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const goalSchema = new mongoose.Schema({
+const eventSchema = new mongoose.Schema({
     user:{type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'User',
@@ -14,4 +14,4 @@ const goalSchema = new mongoose.Schema({
 })
 
 
-export default mongoose.model('Goal', goalSchema);
+export default mongoose.model('Event', eventSchema);

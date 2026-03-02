@@ -1,7 +1,7 @@
 import express, { type Request, type Response } from 'express';
 import colors from 'colors';
 import dotenv from 'dotenv';
-import goalRoutes from './routes/goalRoutes.js';
+import eventRoutes from './routes/eventRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import errorHandler from './middleware/errorMiddleware.js';
 import connectDB from './config/db.js';
@@ -16,7 +16,7 @@ app.use(express.json());
 // Middleware to read URL encoded data (optional but recommended)
 app.use(express.urlencoded({ extended: false }))
 
-app.use('/api/goals', goalRoutes);
+app.use('/api/events', eventRoutes);
 app.use('/api/users', userRoutes);
 
 app.use(errorHandler);

@@ -1,44 +1,44 @@
 import { type Request, type Response } from 'express';
 import expressAsyncHandler from 'express-async-handler';
-import goalModel from '../model/goalModel.js';
+import eventModel from '../model/eventModel.js';
 import usermodel from '../model/usermodel.js';
 
 // @desc Get goals
-// @route GET /api/goals
+// @route GET /api/events
 // @access Private
-const GetGoals = expressAsyncHandler(async (req: Request, res: Response) => {
-    const goals = await goalModel.find({ user: req.user?.id });
+const GetEvents = expressAsyncHandler(async (req: Request, res: Response) => {
+    const Event = await eventModel.find({ user: req.user?.id });
 
-    res.status(200).json(goals);
+    res.status(200).json(Event);
 })
 
 // @desc Set goals
-// @route POST /api/goals
+// @route POST /api/events
 // @access Private
-const SetGoals = expressAsyncHandler(async (req: Request, res: Response) => {
+const SetEvents = expressAsyncHandler(async (req: Request, res: Response) => {
     if(!req.body?.text) { 
         res.status(400)
         throw new Error('Please add a text field');
     }
 
-    const goal = await goalModel.create({
+    const Event = await eventModel.create({
         text: req.body.text,
         user: req.user?.id,
     })
     
-    res.status(200).json(goal);
+    res.status(200).json(Event);
 })
 
 // @desc Update goals
-// @route PUT /api/goals/:id
+// @route PUT /api/events/:id
 // @access Private
-const UpdateGoals = expressAsyncHandler(async (req: Request, res: Response) => {
+const UpdateEvents = expressAsyncHandler(async (req: Request, res: Response) => {
 
-    const goal = await goalModel.findById(req.params.id);
+    const Event = await eventModel.findById(req.params.id);
 
-    if(!goal) {
+    if(!Event) {
         res.status(400)
-        throw new Error('Goal not found');
+        throw new Error('Event not found');
     }
 
     // first checks for user
@@ -52,24 +52,24 @@ const UpdateGoals = expressAsyncHandler(async (req: Request, res: Response) => {
 
 
     // checks if logged in user matches the goal ID of the user it belongs to
-    if(goal.user.toString() !== user.id) {
+    if(Event.user.toString() !== user.id) {
         res.status(401)
         throw new Error('User not authorized');
     }
 
-    const updatedGoal = await goalModel.findByIdAndUpdate(req.params.id, req.body, {new: true})
+    const updatedEvent = await eventModel.findByIdAndUpdate(req.params.id, req.body, {new: true})
 
 
-     res.status(200).json(updatedGoal);
+     res.status(200).json(updatedEvent);
 })
 
 // @desc Delete goals
-// @route DELETE /api/goals/:id
+// @route DELETE /api/events/:id
 // @access Private
-const DeleteGoals = expressAsyncHandler(async (req: Request, res: Response) => {
-    const goal = await goalModel.findById(req.params.id);
+const DeleteEvents = expressAsyncHandler(async (req: Request, res: Response) => {
+    const Event = await eventModel.findById(req.params.id);
 
-    if(!goal) {
+    if(!Event) {
         res.status(400)
         throw new Error('Goal not found');
     }
@@ -85,16 +85,16 @@ const DeleteGoals = expressAsyncHandler(async (req: Request, res: Response) => {
 
 
     // checks if logged in user matches the goal ID of the user it belongs to
-    if(goal.user.toString() !== user.id) {
+    if(Event.user.toString() !== user.id) {
         res.status(401)
         throw new Error('User not authorized');
     }
 
-    await goal.deleteOne();
+    await Event.deleteOne();
 
     res.status(200).json({id: req.params.id});
 })
 
 
 
-export { GetGoals, SetGoals, UpdateGoals, DeleteGoals };
+export { GetEvents, SetEvents, UpdateEvents, DeleteEvents };
