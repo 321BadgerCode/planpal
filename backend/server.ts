@@ -5,10 +5,14 @@ import eventRoutes from './routes/eventRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import errorHandler from './middleware/errorMiddleware.js';
 import connectDB from './config/db.js';
+import cors from 'cors';
 
 dotenv.config();
 const port = process.env.PORT || 5000;
 const app = express();
+
+
+app.use(cors({ origin: 'http://localhost:5173' })); 
 
 connectDB();
 // Middleware to read JSON body
@@ -20,6 +24,10 @@ app.use('/api/events', eventRoutes);
 app.use('/api/users', userRoutes);
 
 app.use(errorHandler);
+
+app.get('/api/test', (req, res) => {
+  res.status(200).json({message:"this working twin"});
+});
 
 
 
