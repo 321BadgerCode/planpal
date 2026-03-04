@@ -1,9 +1,9 @@
 import React from "react";
-import { IonApp } from "@ionic/react";
+import { IonApp, IonRouterOutlet } from "@ionic/react";
 import Home from "./Home";
 import Login from "./login/Login";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router";
+import { Route } from "react-router-dom";
 
 import "@ionic/react/css/core.css";
 import "@ionic/react/css/normalize.css";
@@ -16,15 +16,17 @@ import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
 import "./index.css";
 
+import { IonReactRouter } from "@ionic/react-router";
+
 const App: React.FC = () => {
 	return (
 		<IonApp>
-			<BrowserRouter>
-				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="/login" element={<Login />} />
-				</Routes>
-			</BrowserRouter>
+			<IonReactRouter>
+				<IonRouterOutlet>
+					<Route exact path="/" component={Home} />
+					<Route exact path="/login" component={Login} />
+				</IonRouterOutlet>
+			</IonReactRouter>
 		</IonApp>
 	);
 };
