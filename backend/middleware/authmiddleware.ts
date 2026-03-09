@@ -14,14 +14,12 @@ declare global {
 
 const protect = expressAsyncHandler (async (req: Request, res: Response, next: NextFunction) => {
     let token;
-
-
+    token = req.cookies.token
+    
     // checks if authorization header exists and if it starts with Bearer, which is the standard for sending tokens in the header.
-    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+    if (token) {
         try {
             // first thing you want to do is get token from Bearer header. Split is used to split it from the bearer token, and split by space, because its (bearer token), token being the second item or the 1 index.
-            token = req.headers.authorization.split(' ')[1]?.toString() || '';
-            // you want to verify the token with jwt
             const decoded = jsonwebtoken.verify(token, process.env.JWT_SECRET as string) as jsonwebtoken.JwtPayload;
             
             // get the user from the token, - password makes it so doesnt have password

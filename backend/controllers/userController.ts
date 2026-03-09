@@ -69,12 +69,15 @@ const loginUser = expressAsyncHandler (async (req: Request, res: Response) => {
     const user = await userModel.findOne({email});
 
     if (user && (await bcrypt.compare(password, user.password))) {
-        res.json({
-            _id: user.id,
-            name: user.name,
-            email: user.email,
-            token: generateToken(user._id.toString())
+        const token = generateToken(user._id.toString());
+        
+        res.cookie('token', token, {
+            httpOnly: true,
+            maxAge: 3600000,
+            sameSite: 'lax'
         })
+
+        res.status(200).json({message: 'Login successful', user: user});
     }
 
     else{

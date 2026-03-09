@@ -1,6 +1,6 @@
 
 
-const createAccount = async (email: string, username: string, password: string, confirmPassword: string) => {
+const createAccount = async (email: string, username: string, password: string) => {
 	try {
 		const data = {
 			name: username,

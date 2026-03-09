@@ -17,8 +17,24 @@ import {
 	listOutline
 } from "ionicons/icons";
 import "./Home.css";
+import { useEffect, useState } from "react";
+import verifyToken from "./login/components/requests/verifyToken";
 
 const Home: React.FC = () => {
+	const [link, setLink] = useState("/login");
+
+	useEffect(() => {
+		async function verify() {
+			const loggedIn = await verifyToken();
+			if (loggedIn) {
+				setLink("/dashboard");
+			} else {
+				setLink("/login");
+			}
+		}
+		verify();
+	}, []);
+
 	return (
 		<>
 			{/* Header */}
@@ -33,7 +49,7 @@ const Home: React.FC = () => {
 				<section className="hero-section">
 					<h1>PlanPal</h1>
 					<p>Organize your tasks, projects, and goals all in one place.</p>
-					<a href="/login">
+					<a href={link}>
 						<button className="hero-button">Get Started</button>
 					</a>
 				</section>

@@ -24,16 +24,12 @@ const CreateAnAccountUI = ({ setHasAccount }: Props) => {
 
 		setValidEmail(valid);
 		if (valid && password == confirmPassword) {
-			const attempt = await createAccount(
-				email,
-				username,
-				password,
-				confirmPassword
-			);
+			const attempt = await createAccount(email, username, password);
 			if (!attempt) {
 				setEmailExists(true);
 			} else {
 				setEmailExists(false);
+				setHasAccount(true);
 			}
 		}
 	};

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import login from "./requests/login";
+import verifyToken from "./requests/verifyToken";
+import { useHistory } from "react-router";
 
 interface Props {
 	setHasAccount: (hasAccount: boolean) => void;
@@ -12,10 +14,15 @@ const LoginUI = ({ setHasAccount }: Props) => {
 	const [loggedIn, setLoggedIn] = useState(false);
 	const [invalid, setInvalid] = useState(false);
 
+	const history = useHistory();
+
 	const submit = async () => {
 		const attempt = await login(email, password);
 		setLoggedIn(attempt);
 		setInvalid(!attempt);
+		if (attempt) {
+			history.push("/dashboard");
+		}
 	};
 
 	return (

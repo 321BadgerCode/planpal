@@ -2,6 +2,7 @@ import React from "react";
 import { IonApp, IonRouterOutlet } from "@ionic/react";
 import Home from "./Home";
 import Login from "./login/Login";
+import Dashboard from "./dashboard/dashboard";
 import "./App.css";
 import { Route } from "react-router-dom";
 
@@ -25,6 +26,7 @@ const App: React.FC = () => {
 				<IonRouterOutlet>
 					<Route exact path="/" component={Home} />
 					<Route exact path="/login" component={Login} />
+					<Route exact path="/dashboard" component={Dashboard} />
 				</IonRouterOutlet>
 			</IonReactRouter>
 		</IonApp>
