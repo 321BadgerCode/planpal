@@ -2,7 +2,7 @@ import React from "react";
 import { IonApp, IonRouterOutlet } from "@ionic/react";
 import Home from "./Home";
 import Login from "./login/Login";
-import Dashboard from "./dashboard/dashboard";
+import Dashboard from "./dashboard/Dashboard";
 import "./App.css";
 import { Route } from "react-router-dom";
 
