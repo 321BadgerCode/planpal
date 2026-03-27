@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { logout, getevent, sendevent } from "./eventfunction";
+import { logout, getevent, sendevent, deleteevent } from "./eventfunction";
 
 const Dashboard = () => {
 	interface eventobject {
@@ -12,14 +12,21 @@ const Dashboard = () => {
 
 	const [event, setevent] = useState<eventobject[]>([]);
 	const [newevent, setnewevent] = useState("");
+	const [refresh, setrefresh] = useState(0);
 
 	useEffect(() => {
 		getevent(setevent);
-	}, []);
+	}, [refresh]);
 
-	const storevent = () => {
-		sendevent({ text: newevent });
+	const storevent = async () => {
+		await sendevent({ text: newevent });
 		setnewevent("");
+		setrefresh((prev) => prev + 1);
+	};
+
+	const delevent = async (id: string) => {
+		await deleteevent(id);
+		setrefresh((prev) => prev + 1);
 	};
 
 	return (
@@ -63,7 +70,15 @@ const Dashboard = () => {
 					<p className="text-xl md:text-3xl font-extrabold py-2 md:mt-5">PlanPal</p>
 					<div className="h-[25%] w-[80%] bg-gray-400 px-2">
 						{event.map((item) => (
-							<p>{item.text}</p>
+							<div key={item._id}>
+								<p>{item.text}</p>
+								<button
+									onClick={() => delevent(item._id)}
+									className="text-red-500 hover:scale-110 transition-transform duration-100 ease-in"
+								>
+									X
+								</button>
+							</div>
 						))}
 					</div>
 					<div className="h-[25%] w-[80%] bg-gray-400 px-2 flex flex-col gap-5">
