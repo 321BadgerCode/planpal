@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { logout, getevent } from "./eventfunction";
+import { logout, getevent, sendevent } from "./eventfunction";
 
 const Dashboard = () => {
 	interface eventobject {
@@ -11,10 +11,16 @@ const Dashboard = () => {
 	}
 
 	const [event, setevent] = useState<eventobject[]>([]);
+	const [newevent, setnewevent] = useState("");
 
 	useEffect(() => {
 		getevent(setevent);
 	}, []);
+
+	const storevent = () => {
+		sendevent({ text: newevent });
+		setnewevent("");
+	};
 
 	return (
 		<>
@@ -55,10 +61,26 @@ const Dashboard = () => {
 			<div className="w-screen h-[90dvh] md:h-[100dvh] text-white flex flex-col md:flex-row justify-center items-center gap-3 md:gap-5">
 				<div className="rounded-2xl overflow-auto bg-blue-900 rounded w-[80vw] h-[40dvh] md:w-[35vw] lg:w-[35vw] md:h-[50vh] flex flex-col items-center justify-start gap-3 md:gap-10">
 					<p className="text-xl md:text-3xl font-extrabold py-2 md:mt-5">PlanPal</p>
-					<div className="h-[50%] w-[80%] bg-gray-400 px-2">
+					<div className="h-[25%] w-[80%] bg-gray-400 px-2">
 						{event.map((item) => (
 							<p>{item.text}</p>
 						))}
+					</div>
+					<div className="h-[25%] w-[80%] bg-gray-400 px-2 flex flex-col gap-5">
+						<input
+							className="w-[85%] h-10 pl-1 bg-black rounded-xs"
+							placeholder="input event here"
+							value={newevent}
+							onChange={(e) => {
+								setnewevent(e.target.value);
+							}}
+						></input>
+						<button
+							onClick={storevent}
+							className="w-[85%] w-fit h-10 pl-1 bg-black rounded-xs hover:scale-110 transition-transform duration-100 ease-in"
+						>
+							Send Event
+						</button>
 					</div>
 				</div>
 

@@ -28,3 +28,30 @@ export const getevent = async (setevent: (data: any) => void) => {
 }
 
 
+export const sendevent = async (newevent: any) => {
+    
+    try {
+        const response = await fetch("http://localhost:5000/api/events/", {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body:JSON.stringify(newevent)
+        });
+
+        if (!response.ok) {
+            const errorLog = await response.json();
+            console.error("Mongoose Validation Error:", errorLog);
+            throw new Error("Error while sending request");
+        }
+        else {
+            return true;
+        }
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
+
+
