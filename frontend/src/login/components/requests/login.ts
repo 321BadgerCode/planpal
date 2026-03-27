@@ -24,7 +24,9 @@ export default async function login(email: string, password: string)
 		}
 		else
 		{
+
 			console.log(await response.json());
+			
 			return true;
 		}
 	} catch (error) {
